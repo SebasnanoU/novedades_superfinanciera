@@ -3,6 +3,7 @@ from django.db import models
 class Circulares(models.Model):
     link = models.CharField(max_length=255)
     titulo = models.CharField(max_length=255)
+    intro = models.CharField(max_length=255)
     anexo = models.CharField(max_length=255, blank=True, null=True)
     fecha = models.DateField()
 

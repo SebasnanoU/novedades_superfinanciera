@@ -5,7 +5,11 @@ from datetime import datetime
 from novedades.models import Novedades
 from circulares.models import Circulares
 
+
 def update_novedades():
+    print("Actualizando novedades...")
+    print("Obteniendo datos de la web de la Superfinanciera...")
+    print("hora de ejecución: ", datetime.now())
     with requests.Session() as session:
         web_superfinanciera = session.get("https://www.superfinanciera.gov.co/jsp")
 
@@ -23,7 +27,7 @@ def update_novedades():
                         title = element.select_one('.title h4').text
                         intro = element.select_one('.intro p').text.strip().replace('\n', '').replace('\r', '').replace('\t', '')
 
-                        novedadg = Novedades(link=href, titulo=title, intro=intro)
+                        novedadg = Novedades(link=href, titulo=title, intro=intro, date=datetime.now())
 
                         # Comprobamos si la novedad ya existe en la base de datos
                         if not Novedades.objects.filter(link=href).exists():
@@ -39,6 +43,9 @@ def update_novedades():
 
 
 def update_circulares():
+    print("Actualizando circulares...")
+    print("Obteniendo datos de la web de la Superfinanciera...")
+    print("hora de ejecución: ", datetime.now())
     circulares_nuevas = []
     circulares_guardadas = Circulares.objects.all()
 
@@ -52,6 +59,7 @@ def update_circulares():
         for circular in circulares_superfinanciera:
             elements = circular.find_all('div', {'class': 'col-10 title-circular'})
             for element in elements:
+                print(element)
                 a = element.find('a')
                 href = a['href']
                 link = "https://www.superfinanciera.gov.co" + str(href)

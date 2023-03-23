@@ -4,6 +4,7 @@ class Novedades(models.Model):
     link = models.CharField(max_length=255)
     titulo = models.CharField(max_length=255)
     intro = models.CharField(max_length=255)
+    date = models.DateField()
 
     class Meta:
         verbose_name = 'Novedad'
