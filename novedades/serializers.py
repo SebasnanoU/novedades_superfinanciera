@@ -5,4 +5,4 @@ from novedades.models import Novedades
 class NovedadesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Novedades
-        fields = ['link', 'titulo', 'intro']
+        fields = ['link', 'titulo', 'intro', 'date']
